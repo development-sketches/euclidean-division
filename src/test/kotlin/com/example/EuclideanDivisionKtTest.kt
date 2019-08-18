@@ -2,7 +2,8 @@ package com.example
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 import kotlin.math.absoluteValue
 
 /**
@@ -10,12 +11,13 @@ import kotlin.math.absoluteValue
  */
 internal class EuclideanDivisionKtTest {
 
-    @Test
-    fun euclideanDivision() {
-        val dividend = 12
-        val divisor = 5
+    @ParameterizedTest
+    @CsvSource("12,5", "12,-5", "-12,5", "-12,-5", "15,5")
+    fun testEuclideanDivision(dividend: Int, divisor: Int) {
 
         val (quotient, remainder) = euclideanDivision(dividend, divisor)
+
+        println("dividend: $dividend, divisor: $divisor, quotient: $quotient, remainder: $remainder")
 
         assertEquals(dividend, quotient * divisor + remainder)
         assertTrue(remainder >= 0)
