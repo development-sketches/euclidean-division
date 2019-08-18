@@ -1,7 +1,9 @@
 package com.example
 
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import kotlin.math.absoluteValue
 
 /**
  * @author Eugene Ossipov
@@ -13,12 +15,10 @@ internal class EuclideanDivisionKtTest {
         val dividend = 12
         val divisor = 5
 
-        val expectedQuotient = 2
-        val expectedRemainder = 2
-
         val (quotient, remainder) = euclideanDivision(dividend, divisor)
 
-        assertEquals(expectedQuotient, quotient)
-        assertEquals(expectedRemainder, remainder)
+        assertEquals(dividend, quotient * divisor + remainder)
+        assertTrue(remainder >= 0)
+        assertTrue(remainder < divisor.absoluteValue)
     }
 }
